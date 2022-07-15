@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            transform-style: preserve-3d;
+            perspective: 2000px;
+        }
+        :root, body{ /*body里面设置的 transform-style和perspective会让body默认成为定位元素，而这里body高不确定，在下面使用top50%时就会不生效，所以这里body要继承html的高，或者自己设一个高*/
+            height: 100%;
+        }
+        @keyframes road {
+            0%{
+                transform: translate(-50%, -50%) rotateY(0deg); /*因为下面设置了translate，所以这里还要对他进行原有的设置，不然会覆盖transform，也就是相当于没有移动对齐*/
+            }
+            100%{
+                transform: translate(-50%, -50%) rotateY(360deg);
+            }
+        }
+        .wrap{
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            left: calc(50%);
+            top: calc(50%);
+            transform: translate(-50%, -50%);
+            transform-style: preserve-3d; /* transform-style 只能作用于他的直接子元素，所以这里要重新加设 */
+            animation: road 10s linear infinite;
+        }
+        img{
+            width: 200px;
+            position: absolute;
+            /* backface-visibility: hidden; 不显示图片背面 */
+        }
+        img:nth-of-type(1){
+            transform: rotateY(45deg) translateZ(500px);
+            
+        }
+        img:nth-of-type(2){
+            transform: rotateY(90deg) translateZ(500px);
+           
+        }
+        img:nth-of-type(3){
+            transform: rotateY(135deg) translateZ(500px);
+        }
+        img:nth-of-type(4){
+            transform: rotateY(180deg) translateZ(500px);
+        }
+        img:nth-of-type(5){
+            transform: rotateY(225deg) translateZ(500px);
+        }
+        img:nth-of-type(6){
+            transform: rotateY(270deg) translateZ(500px);
+        }
+        img:nth-of-type(7){
+            transform: rotateY(315deg) translateZ(500px);
+        }
+        img:nth-of-type(8){
+            transform: rotateY(360deg) translateZ(500px);
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <img src="./-4abfc706984e6be2(1).jpg" alt="">
+        <img src="./01bd584ee8GTUfs.jpg" alt="">
+        <img src="./1984921915l2mt0.jpg" alt="">
+        <img src="./1f98e5673944274b(1).jpg" alt="">
+        <img src="./3d87b3a4a63Y9eO.jpg" alt="">
+        <img src="./490388262fbf0bbb(1).jpg" alt="">
+        <img src="./b7e22224876Iqfz.jpg" alt="">
+        <img src="./IMG_20210105_211214(1).jpg" alt="">
+    </div>
+    <script>
+        document.body.onmousemove = function(e){
+            this.style.perspectiveOrigin = e.pageX + 'px ' + e.pageY + 'px';
+        }
+    </script>
+</body>
+</html>
